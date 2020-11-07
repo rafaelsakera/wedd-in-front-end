@@ -1,0 +1,50 @@
+.budget #total_table {
+  margin-top: 2vh;
+}
+
+.budget .button_container {
+  width: 100%;
+  text-align: center;
+}
+
+.budget #add_btn {
+  width: 12em;
+}
+
+.budget .add_form {
+  margin: auto;
+  width: 50%;
+}
+
+.budget .form-group {
+  text-align: right;
+}
+
+.budget input {
+  text-align: right;
+  padding-right: 0vh;
+}
+
+.budget .btnContainer {
+  text-align: center;
+}
+
+.budget svg {
+  margin-left: 5vh;
+}
+
+.budget svg:hover {
+  transform: scale(1.5);
+}
+
+.rightTextAlign {
+  text-align: right;
+}
+
+#addFormAddBtn {
+  margin-left: 3vh;
+}
+
+#editFormEditBtn {
+  margin-left: 3vh;
+}
