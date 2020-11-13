@@ -34,7 +34,7 @@ class MainbudjetTable extends Component {
           <td>{"₪" + stateObject.payed}</td>
           <td>{"₪" + fullPrice}</td>
           <td>{"₪" + stateObject.unitPrice}</td>
-          <td>{"₪" + stateObject.amount}</td>
+          <td>{stateObject.amount}</td>
           <td>{stateObject.category}</td>
           <td>{parseInt(index) + 1}</td>
         </tr>
