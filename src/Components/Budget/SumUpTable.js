@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import "./Budjet.css";
 
 class SumUpTable extends Component {
+  numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   fromStateToHTMLRowsForSummery = (tableRows) => {
     let finalFullPay = 0;
     let finalPayed = 0;
@@ -16,9 +20,9 @@ class SumUpTable extends Component {
 
     return (
       <tr>
-        <td>{finalRemainder.toFixed(1)}</td>
-        <td>{finalPayed}</td>
-        <td>{finalFullPay}</td>
+        <td>{this.numberWithCommas(finalRemainder.toFixed(1))}</td>
+        <td>{this.numberWithCommas(finalPayed)}</td>
+        <td>{this.numberWithCommas(finalFullPay)}</td>
       </tr>
     );
   }

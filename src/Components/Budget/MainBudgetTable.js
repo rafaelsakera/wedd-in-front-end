@@ -3,6 +3,10 @@ import { Trash, Brush } from "react-bootstrap-icons";
 import "./Budjet.css";
 
 class MainbudjetTable extends Component {
+  numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   fromStateToHTMLRows = (budjetRows) => {
     let fullHtmlrows = [];
     let row;
@@ -30,11 +34,11 @@ class MainbudjetTable extends Component {
               }}
             />
           </td>
-          <td>{"₪" + remainder}</td>
-          <td>{"₪" + stateObject.payed}</td>
-          <td>{"₪" + fullPrice}</td>
-          <td>{"₪" + stateObject.unitPrice}</td>
-          <td>{stateObject.amount}</td>
+          <td>{"₪" + this.numberWithCommas(remainder)}</td>
+          <td>{"₪" + this.numberWithCommas(stateObject.payed)}</td>
+          <td>{"₪" + this.numberWithCommas(fullPrice)}</td>
+          <td>{"₪" + this.numberWithCommas(stateObject.unitPrice)}</td>
+          <td>{this.numberWithCommas(stateObject.amount)}</td>
           <td>{stateObject.category}</td>
           <td>{parseInt(index) + 1}</td>
         </tr>
@@ -45,6 +49,8 @@ class MainbudjetTable extends Component {
 
     return fullHtmlrows;
   };
+
+
   render() {
     return (
       <div className="table-responsive">
