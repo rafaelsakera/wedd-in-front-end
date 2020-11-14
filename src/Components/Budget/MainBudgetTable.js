@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Trash, Brush } from "react-bootstrap-icons";
+import { Spinner } from "react-bootstrap";
 import "./Budjet.css";
 
 class MainbudjetTable extends Component {
   numberWithCommas = (x) => {
     return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-  }
+  };
 
   fromStateToHTMLRows = (budjetRows) => {
     let fullHtmlrows = [];
@@ -50,6 +51,11 @@ class MainbudjetTable extends Component {
     return fullHtmlrows;
   };
 
+  spinner = () => {
+    if (this.props.showSpinner === true) {
+      return <Spinner animation="border" variant="dark" />;
+    }
+  };
 
   render() {
     return (
@@ -72,6 +78,7 @@ class MainbudjetTable extends Component {
             {this.fromStateToHTMLRows(this.props.budjetRows)}
           </tbody>
         </table>
+        {this.spinner()}
       </div>
     );
   }

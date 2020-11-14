@@ -3,7 +3,8 @@ import { BrowserRouter, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import PrivateRoute from "./Components/PrivateRoute/PrivateRoute"
+import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
+import GuestList from "./Components/GuestList/GuestList";
 import AppNavbar from "./Components/Navbar/Navbar";
 import HomePage from "./Components/HomePage/HomePage";
 import Budjet from "./Components/Budget/Budget";
@@ -18,6 +19,7 @@ class App extends Component {
           <Route exact path="/login" component={Login} />
           <PrivateRoute exact path="/" component={HomePage} />
           <PrivateRoute exact path="/budget" component={Budjet} />
+          <PrivateRoute exact path="/guest-list" component={GuestList} />
         </div>
       </BrowserRouter>
     );

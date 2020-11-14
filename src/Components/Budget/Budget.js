@@ -9,8 +9,9 @@ import EditForm from "./EditForm";
 class Budjet extends Component {
   state = {
     tableRows: [],
-    editform: false,
     editCategory: {},
+    editform: false,
+    showSpinner: true,
   };
 
   componentDidMount = () => {
@@ -21,6 +22,11 @@ class Budjet extends Component {
       .then((data) => {
         this.setState({
           tableRows: [...data.tableRows],
+        });
+      })
+      .then(() => {
+        this.setState({
+          showSpinner: false,
         });
       })
       .catch((err) => {
@@ -144,6 +150,7 @@ class Budjet extends Component {
     return (
       <div className="budget">
         <MainbudjetTable
+          showSpinner={this.state.showSpinner}
           budjetRows={this.state.tableRows}
           deleteFromState={this.deleteFromState}
           openEditForm={this.openEditForm}

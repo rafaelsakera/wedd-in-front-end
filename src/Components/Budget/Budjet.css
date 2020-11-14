@@ -48,3 +48,7 @@
 #editFormEditBtn {
   margin-left: 3vh;
 }
+
+.budget .table-responsive {
+  text-align: center;
+}

@@ -35,7 +35,7 @@ const AppNavbar = () => {
               </Link>
             </li>
             <li className="nav-item active">
-              <Link className="nav-link" to="#">
+              <Link className="nav-link" to="/guest-list">
                 Guest list
               </Link>
             </li>
