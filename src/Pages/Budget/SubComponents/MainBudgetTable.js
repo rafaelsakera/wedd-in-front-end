@@ -1,11 +1,22 @@
 import React, { Component } from "react";
-import { Trash, Brush } from "react-bootstrap-icons";
-import { Spinner } from "react-bootstrap";
-import "./Budjet.css";
+import { spinner, trash, brush } from "../../../Utils/BootstrapComponents";
+import { connect } from "react-redux";
+import { deleteBudgetDataPOST } from "../../../Utils/ApiRequest";
+import { deleteTableRow } from "../../../State/Actions/badgetActions";
+import { numberWithCommas } from "../../../Utils/StringUtils";
 
 class MainbudjetTable extends Component {
-  numberWithCommas = (x) => {
-    return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+  deleteFromState = (id) => {
+    deleteBudgetDataPOST(id)
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.state === "successes") {
+          this.props.deleteTableRow(id);
+        } else {
+          alert("server err");
+        }
+      })
+      .catch(() => alert("server err"));
   };
 
   fromStateToHTMLRows = (budjetRows) => {
@@ -20,26 +31,14 @@ class MainbudjetTable extends Component {
       row = (
         <tr key={index}>
           <td>
-            <Trash
-              width="2em"
-              height="2em"
-              onClick={() => {
-                this.props.deleteFromState(stateObject.id);
-              }}
-            />
-            <Brush
-              width="2em"
-              height="2em"
-              onClick={() => {
-                this.props.openEditForm(stateObject.id);
-              }}
-            />
+            {trash(this.deleteFromState, stateObject.id)}
+            {brush(this.props.openEditForm, stateObject.id)}
           </td>
-          <td>{"₪" + this.numberWithCommas(remainder)}</td>
-          <td>{"₪" + this.numberWithCommas(stateObject.payed)}</td>
-          <td>{"₪" + this.numberWithCommas(fullPrice)}</td>
-          <td>{"₪" + this.numberWithCommas(stateObject.unitPrice)}</td>
-          <td>{this.numberWithCommas(stateObject.amount)}</td>
+          <td>{"₪" + numberWithCommas(remainder)}</td>
+          <td>{"₪" + numberWithCommas(stateObject.payed)}</td>
+          <td>{"₪" + numberWithCommas(fullPrice)}</td>
+          <td>{"₪" + numberWithCommas(stateObject.unitPrice)}</td>
+          <td>{numberWithCommas(stateObject.amount)}</td>
           <td>{stateObject.category}</td>
           <td>{parseInt(index) + 1}</td>
         </tr>
@@ -49,12 +48,6 @@ class MainbudjetTable extends Component {
     }
 
     return fullHtmlrows;
-  };
-
-  spinner = () => {
-    if (this.props.showSpinner === true) {
-      return <Spinner animation="border" variant="dark" />;
-    }
   };
 
   render() {
@@ -78,10 +71,24 @@ class MainbudjetTable extends Component {
             {this.fromStateToHTMLRows(this.props.budjetRows)}
           </tbody>
         </table>
-        {this.spinner()}
+        {spinner(this.props.showSpinner)}
       </div>
     );
   }
 }
 
-export default MainbudjetTable;
+const mapStateToProps = (state) => {
+  return {
+    tableRows: state.tableRows,
+  };
+};
+
+const mapDispathToProps = (dispatch) => {
+  return {
+    deleteTableRow: (id) => {
+      dispatch(deleteTableRow(id));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispathToProps)(MainbudjetTable);

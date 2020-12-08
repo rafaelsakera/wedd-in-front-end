@@ -52,3 +52,8 @@
 .budget .table-responsive {
   text-align: center;
 }
+
+.center-budget-modal {
+  width: 100%;
+  text-align: center;
+}

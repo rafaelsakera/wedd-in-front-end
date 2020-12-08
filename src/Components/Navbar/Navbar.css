@@ -1,6 +1,5 @@
 @media screen and (min-width: 1200px) {
-    .nav-link:hover {
-      transform: scale(1.09);
-    }
+  .nav-link:hover {
+    transform: scale(1.09);
   }
-  
+}

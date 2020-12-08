@@ -1,0 +1,112 @@
+@media screen and (min-width: 1200px) {
+  .guestList {
+    margin: auto;
+    width: 70%;
+  }
+
+  .guestList .cardButton {
+    margin: auto;
+    width: 70%;
+  }
+
+  .guestList .row-holder {
+    height: 20rem;
+  }
+
+  .guestList .pluse-card {
+    text-align: center;
+  }
+
+  .guestList .pluseLogo {
+    width: 60%;
+  }
+}
+@media screen and (max-width: 1199px) {
+  .guestList .cardButton {
+    margin: auto;
+    width: 90%;
+  }
+
+  .guestList .row-holder {
+    height: 20rem;
+  }
+
+  .guestList .pluseLogo {
+    width: 100%;
+  }
+}
+
+.guestList .pluseLogo:hover {
+  transform: scale(1.05);
+}
+
+.guestList .row-holder {
+  padding-bottom: 1%;
+}
+
+.guestList .categoryHolder {
+  width: 100%;
+}
+
+.guestList .card-title {
+  text-align: center;
+}
+
+.guestList .card-text {
+  direction: rtl;
+  text-align: center;
+}
+
+.guestList .card {
+  width: 30%;
+}
+
+.guestList .card-body {
+  padding-left: 1vh;
+  padding-right: 1vh;
+  padding-bottom: 0;
+}
+
+.guestList .bold {
+  font-weight: bold;
+}
+
+.guestList .main-text {
+  height: 50%;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+}
+
+.guestList .card-header {
+  height: 20%;
+}
+
+.guestList ::-webkit-scrollbar {
+  display: none;
+}
+
+.guestList .card-footer {
+  background-color: white;
+}
+
+.add-new-guest-btn {
+  margin: auto;
+  width: 50%;
+}
+
+.center-modal-title {
+  width: 100%;
+  text-align: center;
+}
+
+.guest-trash:hover {
+  transform: scale(1.05);
+}
+
+.guest-list-spinner {
+  text-align: center;
+}
+
+.category-card-spinner {
+  text-align: center;
+}

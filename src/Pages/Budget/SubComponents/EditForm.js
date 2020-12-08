@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Modal } from "react-bootstrap";
-import "./Budjet.css";
+import "../Budjet.css";
 
 class EditForm extends Component {
   state = {
@@ -82,8 +82,10 @@ class EditForm extends Component {
           backdrop="static"
           keyboard={false}
         >
-          <Modal.Header closeButton>
-            <Modal.Title>ערוך קטגוריה</Modal.Title>
+          <Modal.Header>
+            <Modal.Title className="center-budget-modal">
+              ערוך קטגוריה
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="form_container rightTextAlign" id="editForm">

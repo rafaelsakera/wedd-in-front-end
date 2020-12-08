@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Button, Modal } from "react-bootstrap";
+import { connect } from "react-redux";
 
+import { postBudgetDataPOST } from "../../../Utils/ApiRequest";
+import { addTableRow } from "../../../State/Actions/badgetActions";
 import AddFormsBody from "./AddFormBody";
 
 class AddForm extends Component {
@@ -26,6 +29,27 @@ class AddForm extends Component {
     event.target.className += " was-validated";
   };
 
+  addToState = (row) => {
+    let maxId = 0;
+    this.props.tableRows.forEach((row) => {
+      if (row.id > maxId) {
+        maxId = row.id;
+      }
+    });
+    row.id = maxId + 1;
+
+    postBudgetDataPOST(row)
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.state === "successes") {
+          this.props.addTableRow(row);
+        } else {
+          alert("server err");
+        }
+      })
+      .catch(() => alert("server err"));
+  };
+
   render() {
     return (
       <div className="addFormContainer">
@@ -44,17 +68,18 @@ class AddForm extends Component {
           onHide={() => {
             this.handleClose();
           }}
-          backdrop="static"
           keyboard={false}
         >
-          <Modal.Header closeButton>
-            <Modal.Title>הוסף קטגוריה</Modal.Title>
+          <Modal.Header>
+            <Modal.Title className="center-budget-modal">
+              הוסף קטגוריה
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="form_container" id="addForm">
               <AddFormsBody
                 handelClose={this.handleClose}
-                addToState={this.props.addToState}
+                addToState={this.addToState}
               />
             </div>
           </Modal.Body>
@@ -64,4 +89,18 @@ class AddForm extends Component {
   }
 }
 
-export default AddForm;
+const mapStateToProps = (state) => {
+  return {
+    tableRows: state.tableRows,
+  };
+};
+
+const mapDispathToProps = (dispatch) => {
+  return {
+    addTableRow: (data) => {
+      dispatch(addTableRow(data));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispathToProps)(AddForm);

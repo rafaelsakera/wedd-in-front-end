@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
-
+import { loginPOST } from "../../Utils/ApiRequest";
 import "./Login.css";
 
 class Login extends Component {
@@ -25,10 +25,7 @@ class Login extends Component {
   };
 
   submmitHandler = () => {
-    fetch("/api/login", {
-      method: "POST",
-      body: JSON.stringify(this.state),
-    })
+    loginPOST(this.state)
       .then((res) => res.json())
       .then((data) => {
         this.deleteState();

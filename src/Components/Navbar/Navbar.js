@@ -30,18 +30,18 @@ const AppNavbar = () => {
               </Link>
             </li>
             <li className="nav-item active">
-              <Link className="nav-link" to="#">
-                Photos
-              </Link>
-            </li>
-            <li className="nav-item active">
               <Link className="nav-link" to="/guest-list">
                 Guest list
               </Link>
             </li>
             <li className="nav-item active">
+              <Link className="nav-link" to="/check-list">
+                Check List
+              </Link>
+            </li>
+            <li className="nav-item active">
               <Link className="nav-link" to="#">
-                Notes
+                Photos
               </Link>
             </li>
             <li className="nav-item active">
