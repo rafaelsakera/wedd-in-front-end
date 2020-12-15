@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-
-import { getData, deleteTask } from "../../State/Actions/checkListActions";
-import { deleteTaskPOST, getAllTasksGET } from "../../Utils/ApiRequest";
-import { NodeMinusFill, NodePlus } from "react-bootstrap-icons";
-import { trash } from "../../Utils/BootstrapComponents";
-import NewTask from "./SubComponents/NewTask";
-import { Button } from "react-bootstrap";
-import Dot from "./png/Dot.png";
 import "./CheckList.css";
 
+import Dot from "./img/Dot.png";
+import { Button } from "react-bootstrap";
+import NewTask from "./Components/NewTask";
+import { trash } from "../../Utils/BootstrapComponents";
+import { NodeMinusFill, NodePlus } from "react-bootstrap-icons";
+import DeleteModal from "../../Components/DeleteModal/DeleteModal";
+import { ApiDeleteTask, ApiGetAllTasks } from "../../API/CheckList";
+import { mapDispathToProps, mapStateToProps } from "./State/CheckListState";
+
 function CheckList(props) {
-  const [newtask, setNewTask] = useState(false);
+  const [taskId, settaskId] = useState(null);
+  const [newTask, setNewTask] = useState(false);
+  const [showSafeModal, setShowSafeModal] = useState(false);
 
   useEffect(() => {
     const getRowData = () => {
-      getAllTasksGET()
-        .then((res) => res.json())
+      ApiGetAllTasks()
         .then((res) => {
           if (res.state === "successes") {
             props.getData(res.res.tableRows);
@@ -29,8 +31,7 @@ function CheckList(props) {
   }, []);
 
   const deleteRow = (rowId) => {
-    deleteTaskPOST(rowId)
-      .then((res) => res.json())
+    ApiDeleteTask(rowId)
       .then((res) => {
         if (res.state === "successes") {
           props.deleteTask(rowId);
@@ -41,8 +42,13 @@ function CheckList(props) {
       .catch((err) => alert(err));
   };
 
-  const createRows = () => {
-    return props.rows.map((row) => {
+  const safeDelete = (id) => {
+    setShowSafeModal(true);
+    settaskId(id);
+  };
+
+  const createRows = (rows) => {
+    return rows.map((row) => {
       return (
         <div className="check-list-row" key={row.id}>
           <div className="check-list-row-dot">
@@ -50,7 +56,7 @@ function CheckList(props) {
           </div>
           <div className="check-list-row-contect">{row.task + " "}</div>
           <div className="check-list-row-delete">
-            {trash(deleteRow, row.id)}
+            {trash(safeDelete, row.id)}
           </div>
         </div>
       );
@@ -59,13 +65,23 @@ function CheckList(props) {
 
   return (
     <div className="check-list">
+      <DeleteModal
+        show={showSafeModal}
+        setShow={setShowSafeModal}
+        deleteFunction={deleteRow}
+        funcArgs={[taskId]}
+      />
       <div className="check-list-contect">
         <div className="check-list-title text-white ">
-          <h1>רשימת מטלות</h1>
+          <h1>מטלות</h1>
         </div>
         <div className="check-list-body">
-          {createRows()}
-          <NewTask show={newtask} setNewTask={setNewTask} />
+          {createRows(props.rows, props.deleteTask)}
+          <NewTask
+            show={newTask}
+            setNewTask={setNewTask}
+            addNewTask={props.addNewTask}
+          />
         </div>
       </div>
       <div className="sticky-elemnt">
@@ -73,35 +89,18 @@ function CheckList(props) {
           variant="success"
           size="lg"
           onClick={() => {
-            if (newtask === true) {
+            if (newTask === true) {
               setNewTask(false);
             } else {
               setNewTask(true);
             }
           }}
         >
-          {newtask ? <NodeMinusFill /> : <NodePlus />}
+          {newTask ? <NodeMinusFill /> : <NodePlus />}
         </Button>
       </div>
     </div>
   );
 }
-
-const mapStateToProps = (state) => {
-  return {
-    rows: state.rows,
-  };
-};
-
-const mapDispathToProps = (dispatch) => {
-  return {
-    getData: (data) => {
-      dispatch(getData(data));
-    },
-    deleteTask: (taskId) => {
-      dispatch(deleteTask(taskId));
-    },
-  };
-};
 
 export default connect(mapStateToProps, mapDispathToProps)(CheckList);

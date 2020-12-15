@@ -25,3 +25,16 @@ export const changeBudgetData = (data) => {
     data: data,
   };
 };
+
+export const openEditForm = (id) => {
+  return {
+    type: "OPEN_EDIT_FORM",
+    id: id,
+  };
+};
+
+export const closeEditForm = () => {
+  return {
+    type: "CLOSE_EDIT_FORM",
+  };
+};

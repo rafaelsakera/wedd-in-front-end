@@ -1,5 +1,7 @@
 const initState = {
   tableRows: [],
+  openEditForm: false,
+  editRowId: null,
 };
 
 const budgetReduser = (state = initState, action) => {
@@ -37,6 +39,20 @@ const budgetReduser = (state = initState, action) => {
     return {
       ...state,
       tableRows: newRows,
+    };
+  }
+  if (action.type === "OPEN_EDIT_FORM") {
+    return {
+      ...state,
+      editRowId: action.id,
+      openEditForm: true,
+    };
+  }
+  if (action.type === "CLOSE_EDIT_FORM") {
+    return {
+      ...state,
+      editRowId: null,
+      openEditForm: false,
     };
   }
   return state;

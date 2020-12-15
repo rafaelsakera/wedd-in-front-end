@@ -146,6 +146,8 @@
     ]
   },
   "devDependencies": {
+    "@types/js-cookie": "^2.2.6",
+    "@types/react-redux": "^7.1.12",
     "cross-env": "^7.0.2"
   }
 }

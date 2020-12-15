@@ -1,21 +1,14 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import {
-  addCards,
-  modalFalse,
-  createNewCardModalTrue,
-  createCardModalFalse,
-  spinnerOf,
-} from "../../State/Actions/guestActions";
-
-import { spinner } from "../../Utils/BootstrapComponents";
-
-import { getCardDataGET } from "../../Utils/ApiRequest";
-import NewCardModal from "./SubComponents/NewCardModal.js";
-import CategoryModal from "./SubComponents/CategoryModal";
-import AddCard from "./SubComponents/AddCard.js";
-import Card from "./SubComponents/Card.js";
 import "./GuestList.css";
+
+import Card from "./Components/Card.js";
+import AddCard from "./Components/AddCard.js";
+import { ApiGetCardData } from "../../API/GuestList";
+import CategoryModal from "./Components/CategoryModal";
+import NewCardModal from "./Components/NewCardModal.js";
+import { spinner } from "../../Utils/BootstrapComponents";
+import { mapStateToProps, mapDispathToProps } from "./State/GuestListState";
 
 function GuestList(props) {
   useEffect(() => {
@@ -24,8 +17,7 @@ function GuestList(props) {
   }, []);
 
   const cardData = () => {
-    getCardDataGET()
-      .then((res) => res.json())
+    ApiGetCardData()
       .then((res) => {
         if (res.state === "successes") {
           props.addCards(res.res.tableRows);
@@ -84,35 +76,5 @@ function GuestList(props) {
     </div>
   );
 }
-
-const mapStateToProps = (state) => {
-  return {
-    cardData: state.cardData,
-    modal: state.modal,
-    categoryId: state.categoryId,
-    categoryName: state.categoryName,
-    showSpinner: state.showSpinner,
-  };
-};
-
-const mapDispathToProps = (dispatch) => {
-  return {
-    addCards: (data) => {
-      dispatch(addCards(data));
-    },
-    modalFalse: () => {
-      dispatch(modalFalse());
-    },
-    createNewCardModalTrue: () => {
-      dispatch(createNewCardModalTrue());
-    },
-    createCardModalFalse: () => {
-      dispatch(createCardModalFalse());
-    },
-    spinnerOf: () => {
-      dispatch(spinnerOf());
-    },
-  };
-};
 
 export default connect(mapStateToProps, mapDispathToProps)(GuestList);

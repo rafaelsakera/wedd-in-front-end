@@ -1,0 +1,8 @@
+.delete-modal .delete-modal-title {
+  width: 100%;
+  text-align: center;
+}
+
+.delete-modal .delete-modal-body {
+  text-align: right;
+}
