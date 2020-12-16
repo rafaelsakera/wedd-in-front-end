@@ -4,7 +4,7 @@ import "./GuestList.css";
 
 import Card from "./Components/Card.js";
 import AddCard from "./Components/AddCard.js";
-import { ApiGetCardData } from "../../API/GuestList";
+import { ApiGetCardData, ApiGetOverAllGuests } from "../../API/GuestList";
 import CategoryModal from "./Components/CategoryModal";
 import NewCardModal from "./Components/NewCardModal.js";
 import { spinner } from "../../Utils/BootstrapComponents";
@@ -13,6 +13,7 @@ import { mapStateToProps, mapDispathToProps } from "./State/GuestListState";
 function GuestList(props) {
   useEffect(() => {
     cardData();
+    overAllGeusts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -27,6 +28,11 @@ function GuestList(props) {
       })
       .then(() => props.spinnerOf())
       .catch(() => alert("server error"));
+  };
+
+  const overAllGeusts = async () => {
+    const res = await ApiGetOverAllGuests();
+    await props.updateOverallGuests(res.res.overallGuests);
   };
 
   const showCards = () => {
@@ -69,7 +75,7 @@ function GuestList(props) {
         categoryName={props.categoryName}
       />
       <div className="d-flex justify-content-center">
-        <h1>מוזמנים</h1>
+        <h1>מוזמנים - {props.overAllGeusts}</h1>
       </div>
       <div className="guest-list-spinner">{spinner(props.showSpinner)}</div>
       <div className="categoryHolder">{showCards()}</div>

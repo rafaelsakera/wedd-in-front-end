@@ -2,14 +2,21 @@ export const ApiGetCardData = async () => {
   const res = await fetch("/api/get-card-data", {
     method: "GET",
   });
-  return await res.json();
+  return res.json();
+};
+
+export const ApiGetOverAllGuests = async () => {
+  const res = await fetch("/api/get-overall-guests", {
+    method: "GET",
+  });
+  return res.json();
 };
 
 export const ApiGetCategoryGuest = async (categoryId) => {
   const res = await fetch("/api/get-category-guest?id=" + categoryId, {
     method: "GET",
   });
-  return await res.json();
+  return res.json();
 };
 
 export const ApiDeleteGuest = async (guestId) => {
@@ -19,7 +26,7 @@ export const ApiDeleteGuest = async (guestId) => {
       guestId: guestId,
     }),
   });
-  return await res.json();
+  return res.json();
 };
 
 export const ApiAddNewGuest = async (categoryId, guestName, amount) => {
@@ -31,7 +38,7 @@ export const ApiAddNewGuest = async (categoryId, guestName, amount) => {
       amount: amount,
     }),
   });
-  return await res.json();
+  return res.json();
 };
 
 export const ApiDeleteCard = async (categoryId) => {
@@ -41,7 +48,7 @@ export const ApiDeleteCard = async (categoryId) => {
       categoryId: categoryId,
     }),
   });
-  return await res.json();
+  return res.json();
 };
 
 export const ApiAddNewCard = async (cardName, cardDescription) => {
@@ -52,5 +59,5 @@ export const ApiAddNewCard = async (cardName, cardDescription) => {
       baseText: cardDescription,
     }),
   });
-  return await res.json();
+  return res.json();
 };

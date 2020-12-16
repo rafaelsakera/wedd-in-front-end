@@ -10,6 +10,7 @@ import {
   ApiAddNewGuest,
   ApiGetCategoryGuest,
   ApiDeleteCard,
+  ApiGetOverAllGuests,
 } from "../../../API/GuestList";
 import GuestTable from "./GuestTable";
 import NewGuestForm from "./NewGuestForm";
@@ -34,6 +35,11 @@ function CategoryModal(props) {
             ApiGetCategoryGuest(props.categoryId)
               .then((res) => {
                 props.GuestListRows(res.res.tableRows);
+              })
+              .then(() => {
+                ApiGetOverAllGuests().then((res) => {
+                  props.updateOverallGuests(res.res.overallGuests);
+                });
               })
               .catch(() => alert("server error"));
           }
@@ -80,6 +86,11 @@ function CategoryModal(props) {
       })
       .then(() => {
         props.modalFalse();
+      })
+      .then(() => {
+        ApiGetOverAllGuests().then((res) => {
+          props.updateOverallGuests(res.res.overallGuests);
+        });
       })
       .catch(() => alert("server error"));
   };

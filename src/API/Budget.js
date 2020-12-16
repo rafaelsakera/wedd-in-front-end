@@ -4,14 +4,14 @@ export const ApieditBudgetData = async (id, editData) => {
     body: JSON.stringify({ rowId: id, data: editData }),
   });
 
-  return await res.json();
+  return res.json();
 };
 
 export const ApigetBudgetData = async () => {
   const res = await fetch("/api/get-budget-data", {
     method: "GET",
   });
-  return await res.json();
+  return res.json();
 };
 
 export const ApipostBudgetData = async (row) => {
@@ -20,7 +20,7 @@ export const ApipostBudgetData = async (row) => {
     body: JSON.stringify(row),
   });
 
-  return await res.json();
+  return res.json();
 };
 
 export const ApideleteBudgetData = async (id) => {
@@ -29,7 +29,7 @@ export const ApideleteBudgetData = async (id) => {
     body: JSON.stringify({ rowId: id }),
   });
 
-  return await res.json();
+  return res.json();
 };
 
 export const ApigetSpecificBudgetData = async (id) => {
@@ -40,5 +40,5 @@ export const ApigetSpecificBudgetData = async (id) => {
     }),
   });
 
-  return await res.json();
+  return res.json();
 };

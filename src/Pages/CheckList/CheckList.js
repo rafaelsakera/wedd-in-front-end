@@ -17,29 +17,33 @@ function CheckList(props) {
   const [showSafeModal, setShowSafeModal] = useState(false);
 
   useEffect(() => {
-    const getRowData = () => {
-      ApiGetAllTasks()
-        .then((res) => {
-          if (res.state === "successes") {
-            props.getData(res.res.tableRows);
-          }
-        })
-        .catch((res) => alert(res));
-    };
+    async function getRowData() {
+      try {
+        const apiRes = await ApiGetAllTasks();
+        if (apiRes.state === "successes") {
+          await props.getData(apiRes.res.tableRows);
+        } else {
+          alert("server err");
+        }
+      } catch (err) {
+        alert("server err");
+      }
+    }
     getRowData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const deleteRow = (rowId) => {
-    ApiDeleteTask(rowId)
-      .then((res) => {
-        if (res.state === "successes") {
-          props.deleteTask(rowId);
-        } else {
-          alert("server err");
-        }
-      })
-      .catch((err) => alert(err));
+  const deleteRow = async (rowId) => {
+    try {
+      const res = await ApiDeleteTask(rowId);
+      if (res.state === "successes") {
+        await props.deleteTask(rowId);
+      } else {
+        alert("server err");
+      }
+    } catch (err) {
+      alert("server err");
+    }
   };
 
   const safeDelete = (id) => {

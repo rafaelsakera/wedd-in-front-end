@@ -4,6 +4,7 @@ import {
   createNewCardModalTrue,
   createCardModalFalse,
   spinnerOf,
+  updateOverallGuests,
 } from "../../../State/Actions/guestActions";
 
 export const mapStateToProps = (state) => {
@@ -13,6 +14,7 @@ export const mapStateToProps = (state) => {
     categoryId: state.categoryId,
     categoryName: state.categoryName,
     showSpinner: state.showSpinner,
+    overAllGeusts: state.overAllGeusts,
   };
 };
 
@@ -32,6 +34,9 @@ export const mapDispathToProps = (dispatch) => {
     },
     spinnerOf: () => {
       dispatch(spinnerOf());
+    },
+    updateOverallGuests: (guestNum) => {
+      dispatch(updateOverallGuests(guestNum));
     },
   };
 };

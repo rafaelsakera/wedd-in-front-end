@@ -56,3 +56,10 @@ export const spinnerOf = () => {
     type: "OFF_SPINNER",
   };
 };
+
+export const updateOverallGuests = (guestNum) => {
+  return {
+    type: "UPDATE_OVERALL_GUESTS",
+    guestNum: guestNum,
+  };
+};

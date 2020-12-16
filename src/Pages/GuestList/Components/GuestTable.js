@@ -3,7 +3,11 @@ import { Table } from "react-bootstrap";
 import { connect } from "react-redux";
 
 import { spinner, trash } from "../../../Utils/BootstrapComponents";
-import { ApiGetCategoryGuest, ApiDeleteGuest } from "../../../API/GuestList";
+import {
+  ApiGetCategoryGuest,
+  ApiDeleteGuest,
+  ApiGetOverAllGuests,
+} from "../../../API/GuestList";
 import { mapDispathToProps, mapStateToProps } from "../State/GuestTableState";
 
 function GuestTable(props) {
@@ -34,6 +38,11 @@ function GuestTable(props) {
         } else {
           alert("server error");
         }
+      })
+      .then(() => {
+        ApiGetOverAllGuests().then((res) => {
+          props.updateOverallGuests(res.res.overallGuests);
+        });
       })
       .catch(() => alert("server err"));
   };
@@ -70,9 +79,7 @@ function GuestTable(props) {
         </thead>
         <tbody>{makeTableRows()}</tbody>
       </Table>
-      <div className="category-card-spinner">
-        {spinner(showSpinner)}
-      </div>
+      <div className="category-card-spinner">{spinner(showSpinner)}</div>
       <div className="guestSumUp text-right">
         סך הכל אורחים בקבוצה: {guestSumUp()}
       </div>

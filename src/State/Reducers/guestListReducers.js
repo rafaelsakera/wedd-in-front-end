@@ -6,6 +6,7 @@ const initState = {
   guestListRows: [],
   newCardModal: false,
   showSpinner: true,
+  overAllGeusts: 0,
 };
 
 const guestListReduser = (state = initState, action) => {
@@ -73,6 +74,13 @@ const guestListReduser = (state = initState, action) => {
     return {
       ...state,
       showSpinner: false,
+    };
+  }
+
+  if (action.type === "UPDATE_OVERALL_GUESTS") {
+    return {
+      ...state,
+      overAllGeusts: action.guestNum,
     };
   }
 

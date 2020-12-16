@@ -16,19 +16,24 @@ function BudjetTable(props) {
   const [deleteId, setDeleteId] = useState(null);
 
   useEffect(() => {
-    ApigetBudgetData()
-      .then((data) => {
-        props.getTableRows(data.tableRows);
-      })
-      .then(() => {
-        setShowSpinner(false);
-      })
-      .catch(() => {
-        setShowSpinner(false);
-        alert("server err");
-      });
+    apireq();
+    const interval = setInterval(() => {
+      apireq();
+    }, 10000);
+    return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const apireq = async () => {
+    try {
+      const apiRes = await ApigetBudgetData();
+      await props.getTableRows(apiRes.tableRows);
+      setShowSpinner(false);
+    } catch (err) {
+      setShowSpinner(false);
+      alert("server err");
+    }
+  };
 
   const safeDeleteRow = (id) => {
     setDeleteId(id);
