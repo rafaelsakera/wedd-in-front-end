@@ -20,6 +20,10 @@
   .guestList .pluseLogo {
     width: 60%;
   }
+
+  .guestList .card {
+    width: 30%;
+  }
 }
 @media screen and (max-width: 1199px) {
   .guestList .cardButton {
@@ -33,6 +37,10 @@
 
   .guestList .pluseLogo {
     width: 100%;
+  }
+
+  .guestList .card {
+    width: 33%;
   }
 }
 
@@ -57,9 +65,7 @@
   text-align: center;
 }
 
-.guestList .card {
-  width: 30%;
-}
+
 
 .guestList .card-body {
   padding-left: 1vh;

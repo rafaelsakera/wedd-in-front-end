@@ -24,7 +24,7 @@ function Card(props) {
               props.modelIdAndName(props.cardData.id, props.cardData.title);
             }}
           >
-            צפה / ערוך
+            כנס
           </Button>
         </div>
       </div>
