@@ -57,7 +57,7 @@ function NewCardModal(props) {
         <Row>
           <Col>
             <Form.Control
-              required
+              autoComplete="off"
               className="text-right"
               placeholder="תיאור קצר"
               name="cardDescription"
@@ -67,6 +67,7 @@ function NewCardModal(props) {
           <Col>
             <Form.Control
               required
+              autoComplete="off"
               className="text-right"
               placeholder="שם"
               name="cardName"

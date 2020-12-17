@@ -16,6 +16,7 @@ function EditFormBody({ state, setState }) {
           <input
             type="text"
             name="category"
+            autoComplete="off"
             className="form-control rightTextAlign"
             id="editFormCategory"
             placeholder={state.rowDetails.category}
@@ -29,6 +30,7 @@ function EditFormBody({ state, setState }) {
           <input
             type="number"
             name="amount"
+            autoComplete="off"
             className="form-control rightTextAlign"
             id="editFormAmount"
             onChange={(e) => editFormChange(e, state, setState)}
@@ -42,6 +44,7 @@ function EditFormBody({ state, setState }) {
           <input
             type="number"
             name="unit_price"
+            autoComplete="off"
             className="form-control rightTextAlign"
             id="editFormUnitPrice"
             onChange={(e) => editFormChange(e, state, setState)}
@@ -55,6 +58,7 @@ function EditFormBody({ state, setState }) {
           <input
             type="number"
             name="payed"
+            autoComplete="off"
             className="form-control rightTextAlign"
             id="editFormPayed"
             onChange={(e) => editFormChange(e, state, setState)}

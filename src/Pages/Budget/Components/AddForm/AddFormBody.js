@@ -52,6 +52,7 @@ function AddFormsBody(props) {
           </label>
           <input
             type="text"
+            autoComplete="off"
             name="category"
             className="form-control rightTextAlign"
             id="addFormCategory"
@@ -65,6 +66,7 @@ function AddFormsBody(props) {
           <label htmlFor="addFormAmount">כמות</label>
           <input
             type="number"
+            autoComplete="off"
             name="amount"
             className="form-control rightTextAlign"
             id="addFormAmount"
@@ -78,6 +80,7 @@ function AddFormsBody(props) {
           <label htmlFor="addFormUnitPrice">מחיר יחידה</label>
           <input
             type="number"
+            autoComplete="off"
             name="unitPrice"
             className="form-control rightTextAlign"
             id="addFormUnitPrice"
@@ -92,6 +95,7 @@ function AddFormsBody(props) {
           <input
             type="number"
             name="payed"
+            autoComplete="off"
             className="form-control rightTextAlign"
             id="addFormPayed"
             placeholder="הכנס מחיר ששולם מראש"

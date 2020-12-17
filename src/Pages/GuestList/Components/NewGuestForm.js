@@ -12,6 +12,7 @@ function NewGuestForm({ validated, submitHandler, changeHandler }) {
         <Col>
           <Form.Control
             required
+            autoComplete="off"
             className="text-right"
             placeholder="כמות"
             type="number"
@@ -22,6 +23,7 @@ function NewGuestForm({ validated, submitHandler, changeHandler }) {
         <Col>
           <Form.Control
             required
+            autoComplete="off"
             className="text-right"
             placeholder="שם"
             name="guestName"
